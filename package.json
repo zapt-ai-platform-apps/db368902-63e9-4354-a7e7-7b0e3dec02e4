@@ -1,7 +1,7 @@
 {
   "name": "html-code-generator",
   "version": "1.0.0",
-  "description": "HTML Code Generator App built with SolidJS and TailwindCSS.",
+  "description": "تطبيق مولد كود HTML مبني باستخدام SolidJS و TailwindCSS.",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -1,106 +1,106 @@
-# HTML Code Generator
+# مولد كود HTML
 
-## Overview
+## نظرة عامة
 
-The HTML Code Generator is a web application that allows users to easily create HTML code snippets by selecting an HTML element, adding attributes, and specifying content. This tool is perfect for beginners learning HTML or developers who want a quick way to generate code snippets.
+مولد كود HTML هو تطبيق ويب يتيح للمستخدمين إنشاء مقاطع كود HTML بسهولة عن طريق اختيار عنصر HTML، إضافة السمات، وتحديد المحتوى. هذه الأداة مثالية للمبتدئين في تعلم HTML أو للمطورين الذين يرغبون في طريقة سريعة لإنشاء مقاطع الكود.
 
-## User Journey
+## رحلة المستخدم
 
-1. **Access the Application**
+1. **الوصول إلى التطبيق**
 
-   - The user navigates to the HTML Code Generator app in their web browser.
+   - يتنقل المستخدم إلى تطبيق مولد كود HTML في متصفح الويب الخاص به.
 
-2. **Select an HTML Element**
+2. **اختيار عنصر HTML**
 
-   - The user is presented with a dropdown menu containing a list of common HTML elements (e.g., `div`, `p`, `h1`, `a`, `img`, etc.).
-   - The user selects the desired HTML element from the dropdown.
+   - يتم عرض قائمة منسدلة تحتوي على قائمة بعناصر HTML الشائعة (مثل `div`، `p`، `h1`، `a`، `img`، إلخ).
+   - يختار المستخدم عنصر HTML المطلوب من القائمة المنسدلة.
 
-3. **Add Attributes**
+3. **إضافة السمات**
 
-   - Below the dropdown, there is an input field labeled "Attributes."
-   - The user can enter any attributes they wish to add to the selected HTML element (e.g., `class="my-class"` or `id="my-id"`).
-   - Attributes should be entered in the proper syntax.
+   - أسفل القائمة المنسدلة، يوجد حقل إدخال بعنوان "السمات".
+   - يمكن للمستخدم إدخال أي سمات يرغب في إضافتها إلى عنصر HTML المحدد (مثل `class="my-class"` أو `id="my-id"`).
+   - يجب إدخال السمات بالصيغة الصحيحة.
 
-4. **Enter Content (if applicable)**
+4. **إدخال المحتوى (إذا كان ذلك مناسبًا)**
 
-   - For elements that can contain content (e.g., `div`, `p`, `h1`), a textarea labeled "Content" is displayed.
-   - The user can enter the content that will appear inside the HTML element.
-   - For self-closing elements (e.g., `img`, `input`), the content field is hidden since it is not applicable.
+   - بالنسبة للعناصر التي يمكن أن تحتوي على محتوى (مثل `div`، `p`، `h1`)، يتم عرض منطقة نص بعنوان "المحتوى".
+   - يمكن للمستخدم إدخال المحتوى الذي سيظهر داخل عنصر HTML.
+   - بالنسبة للعناصر ذاتية الإغلاق (مثل `img`، `input`)، يتم إخفاء حقل المحتوى لأنه غير مناسب.
 
-5. **Generate HTML Code**
+5. **توليد كود HTML**
 
-   - The user clicks the "Generate HTML Code" button.
-   - The application generates the HTML code based on the user's selections and inputs.
-   - The generated code is displayed below the button in a formatted code block.
+   - ينقر المستخدم على زر "توليد كود HTML".
+   - يقوم التطبيق بتوليد كود HTML بناءً على اختيارات وإدخالات المستخدم.
+   - يتم عرض الكود المتولد أسفل الزر في كتلة كود منسقة.
 
-6. **Copy the Code**
+6. **نسخ الكود**
 
-   - Below the generated code, there is a "Copy to Clipboard" button.
-   - The user can click this button to copy the generated HTML code to their clipboard.
-   - A success message "Code copied to clipboard!" is displayed upon successful copying.
+   - أسفل الكود المتولد، يوجد زر "نسخ إلى الحافظة".
+   - يمكن للمستخدم النقر على هذا الزر لنسخ كود HTML المتولد إلى الحافظة الخاصة به.
+   - يتم عرض رسالة نجاح "تم نسخ الكود إلى الحافظة!" عند النسخ بنجاح.
 
-## Additional Features
+## الميزات الإضافية
 
-- **Responsive Design**
+- **تصميم متجاوب**
 
-  - The application is responsive and works well on various screen sizes, including mobile devices and larger screens.
+  - التطبيق متجاوب ويعمل بشكل جيد على مختلف أحجام الشاشات، بما في ذلك الأجهزة المحمولة والشاشات الكبيرة.
 
-- **User-Friendly Interface**
+- **واجهة سهلة الاستخدام**
 
-  - The inputs are clearly labeled, and the interface is intuitive.
-  - Buttons have hover effects and are styled for ease of use.
+  - تم تسمية المدخلات بوضوح، والواجهة بديهية.
+  - الأزرار تحتوي على تأثيرات عند التحويم ومصممة لسهولة الاستخدام.
 
-- **Error Handling**
+- **معالجة الأخطاء**
 
-  - The application ensures that the inputs are properly sanitized.
-  - Loading states are handled gracefully (although the app does not make any API calls in this version).
+  - يضمن التطبيق أن المدخلات تتم معالجتها بشكل صحيح.
+  - حالات التحميل تتم معالجتها بسلاسة (على الرغم من أن التطبيق لا يقوم بأي طلبات API في هذا الإصدار).
 
-## Technologies Used
+## التقنيات المستخدمة
 
 - **SolidJS**
 
-  - A declarative JavaScript library for creating user interfaces.
+  - مكتبة JavaScript تعبيرية لإنشاء واجهات المستخدم.
 
 - **Tailwind CSS**
 
-  - A utility-first CSS framework used for styling the application.
+  - إطار عمل CSS يركز على الأدوات المستخدمة في تصميم التطبيق.
 
 - **Vite**
 
-  - A fast build tool used for bundling and developing the application.
+  - أداة بناء سريعة تستخدم لتجميع وتطوير التطبيق.
 
-## Getting Started
+## البدء
 
-To run the application locally:
+لتشغيل التطبيق محليًا:
 
-1. **Install Dependencies**
+1. **تثبيت التبعيات**
 
    ```bash
    npm install
    ```
 
-2. **Run the Development Server**
+2. **تشغيل خادم التطوير**
 
    ```bash
    npm run dev
    ```
 
-3. **Build for Production**
+3. **البناء للإنتاج**
 
    ```bash
    npm run build
    ```
 
-4. **Preview the Production Build**
+4. **معاينة بناء الإنتاج**
 
    ```bash
    npm run serve
    ```
 
-## Contributing
+## المساهمة
 
-Contributions are welcome! Please fork the repository and submit a pull request.
+المساهمات مرحب بها! يرجى عمل fork للمستودع وتقديم طلب سحب.
 
-## License
+## الترخيص
 
-This project is licensed under the MIT License.
+هذا المشروع مرخص بموجب ترخيص MIT.
