@@ -1,5 +1,4 @@
-import { createSignal } from 'solid-js';
-import { Show, For } from 'solid-js';
+import { createSignal, Show, For } from 'solid-js';
 
 function HtmlGenerator() {
   const [elementType, setElementType] = createSignal('div');
@@ -7,24 +6,40 @@ function HtmlGenerator() {
   const [content, setContent] = createSignal('');
   const [generatedCode, setGeneratedCode] = createSignal('');
   const [copySuccess, setCopySuccess] = createSignal('');
+  const [errorMessage, setErrorMessage] = createSignal('');
+  const [isLoading, setIsLoading] = createSignal(false);
 
-  const elements = ['div', 'p', 'h1', 'h2', 'h3', 'span', 'a', 'ul', 'li', 'button', 'input', 'img'];
+  const elements = [
+    'div', 'p', 'h1', 'h2', 'h3', 'span', 'a', 'ul', 'li', 
+    'button', 'input', 'img', 'section', 'article', 'header', 'footer'
+  ];
 
   const generateCode = () => {
+    setIsLoading(true);
+    setErrorMessage('');
+    setCopySuccess('');
+
     let attrString = attributes().trim();
     if (attrString) {
+      // Validate attributes format
+      const attrPattern = /(\w+)=("[^"]*"|'[^']*')/g;
+      if (!attrPattern.test(attrString)) {
+        setErrorMessage('السمات المدخلة غير صحيحة. الرجاء التحقق من التنسيق.');
+        setIsLoading(false);
+        return;
+      }
       attrString = ' ' + attrString;
     }
 
     let code;
-    if (['img', 'input'].includes(elementType())) {
+    if (['img', 'input', 'br', 'hr', 'meta', 'link'].includes(elementType())) {
       code = `<${elementType()}${attrString} />`;
     } else {
       code = `<${elementType()}${attrString}>${content()}</${elementType()}>`;
     }
 
     setGeneratedCode(code);
-    setCopySuccess('');
+    setIsLoading(false);
   };
 
   const copyToClipboard = async () => {
@@ -37,10 +52,10 @@ function HtmlGenerator() {
   };
 
   return (
-    <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md h-full">
-      <h1 class="text-2xl font-bold mb-4 text-gray-800 text-center">مولد كود HTML</h1>
+    <div class="h-full bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center">مولد كود HTML</h1>
 
-      <div class="mb-4">
+      <div class="mb-6">
         <label class="block text-gray-700 mb-2">اختر عنصر HTML:</label>
         <select
           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent cursor-pointer"
@@ -48,14 +63,12 @@ function HtmlGenerator() {
           onInput={(e) => setElementType(e.target.value)}
         >
           <For each={elements}>
-            {(element) => (
-              <option value={element}>{element}</option>
-            )}
+            {(element) => <option value={element}>{element}</option>}
           </For>
         </select>
       </div>
 
-      <div class="mb-4">
+      <div class="mb-6">
         <label class="block text-gray-700 mb-2">السمات (مثال: class="my-class" id="my-id"):</label>
         <input
           type="text"
@@ -66,8 +79,8 @@ function HtmlGenerator() {
         />
       </div>
 
-      <Show when={!['img', 'input'].includes(elementType())}>
-        <div class="mb-4">
+      <Show when={!['img', 'input', 'br', 'hr', 'meta', 'link'].includes(elementType())}>
+        <div class="mb-6">
           <label class="block text-gray-700 mb-2">المحتوى:</label>
           <textarea
             placeholder="أدخل المحتوى داخل العنصر"
@@ -81,10 +94,17 @@ function HtmlGenerator() {
 
       <button
         onClick={generateCode}
-        class="w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+        class={`w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer ${
+          isLoading() ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
+        disabled={isLoading()}
       >
-        توليد كود HTML
+        {isLoading() ? 'جارٍ التوليد...' : 'توليد كود HTML'}
       </button>
+
+      <Show when={errorMessage()}>
+        <p class="mt-4 text-red-600">{errorMessage()}</p>
+      </Show>
 
       <Show when={generatedCode()}>
         <div class="mt-6">
@@ -94,7 +114,7 @@ function HtmlGenerator() {
           </pre>
           <button
             onClick={copyToClipboard}
-            class="mt-2 px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+            class="mt-4 w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
           >
             نسخ إلى الحافظة
           </button>
